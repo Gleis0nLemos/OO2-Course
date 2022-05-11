@@ -42,24 +42,65 @@ class Serie(Programa):
     def __str__(self):
         return f"{self._nome} - {self.ano} - {self.temporadas} Temporadas   {self._likes} Likes"
 
+#"herança é o mecanismo pelo qual estendemos a funcionalidade de uma classe. usando uma built-in por exemplo
+# class Playlist(list):
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+
+    @property
+    def listagem(self):
+        return self._programas
+
+    @property
+    def tamanho(self):
+        return len(self._programas)
+########
+
+
 vingadores = Filme("Vingadores: Guerra Infinita", 2018, 160)
-vingadores.add_likes()
-vingadores.add_likes()
+atlanta = Serie("Atlanta", 2018, 2)
+peakyB = Serie("Peaky blinders", 2019, 6)
+dark = Serie("Dark", 2020, 3)
+interes = Serie("Interestelar", 2014, 150)
 #f, usado para formatar a apresentação do print
 # print(f"{vingadores.nome} - {vingadores.duracao}min : {vingadores.likes} Likes")
 
-atlanta = Serie("Atlanta", 2018, 2)
+########
+
+peakyB.add_likes()
+peakyB.add_likes()
+dark.add_likes()
+interes.add_likes()
+interes.add_likes()
+interes.add_likes()
+dark.add_likes()
+dark.add_likes()
+peakyB.add_likes()
+peakyB.add_likes()
+vingadores.add_likes()
+peakyB.add_likes()
+dark.add_likes()
+dark.add_likes()
+vingadores.add_likes()
+vingadores.add_likes()
+vingadores.add_likes()
 atlanta.add_likes()
 atlanta.add_likes()
 atlanta.add_likes()
 # print(f"{atlanta.nome} - {atlanta.temporadas} Temporadas : {atlanta.likes} Likes")
 
+########
 
-
-filmes_series = [vingadores, atlanta]           #para criar uma playlist, fazer uma lista nos ajudará a
+filmes_series = [peakyB, dark, interes]           #para criar uma playlist, fazer uma lista nos ajudará a
                                                 #ter um acesso mais especificado para buscas de nosso programa de TV
+playlist_fds = Playlist("Fim de semana", filmes_series)
+print(f"Tamanho da Playlist: {len(playlist_fds.listagem)} Programas")
 
-for programa in filmes_series:
+for programa in playlist_fds.listagem:
     print(programa)
     # detalhes = programa.duracao if hasattr(programa, "duracao") else programa.temporadas
     # print(f"{programa.nome} - {detalhes} : {programa.likes} Likes")
+
+print(f"Pertence a Playlist? {vingadores in playlist_fds.listagem}")
