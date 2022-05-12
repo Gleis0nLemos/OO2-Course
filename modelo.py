@@ -49,13 +49,19 @@ class Playlist:
         self.nome = nome
         self._programas = programas
 
+#Este método define algo que é iterável e, no caso, precisaremos receber um item
+#para que este seja repassado à lista interna que estamos utilizando, isto é, programas.
+    def __getitem__(self, item):
+        return self._programas[item]
+
     @property
     def listagem(self):
         return self._programas
 
-    @property
-    def tamanho(self):
+
+    def __len__(self):
         return len(self._programas)
+
 ########
 
 
@@ -69,6 +75,8 @@ interes = Serie("Interestelar", 2014, 150)
 
 ########
 
+peakyB.add_likes()
+peakyB.add_likes()
 peakyB.add_likes()
 peakyB.add_likes()
 dark.add_likes()
@@ -96,11 +104,19 @@ atlanta.add_likes()
 filmes_series = [peakyB, dark, interes]           #para criar uma playlist, fazer uma lista nos ajudará a
                                                 #ter um acesso mais especificado para buscas de nosso programa de TV
 playlist_fds = Playlist("Fim de semana", filmes_series)
-print(f"Tamanho da Playlist: {len(playlist_fds.listagem)} Programas")
+print(f"Tamanho da Playlist: {len(playlist_fds)} Programas")
 
-for programa in playlist_fds.listagem:
+#detalhes = programa.duracao if hasattr(programa, "duracao") else programa.temporadas
+#print(f"{programa.nome} - {detalhes} : {programa.likes} Likes")
+
+
+for programa in playlist_fds:
     print(programa)
-    # detalhes = programa.duracao if hasattr(programa, "duracao") else programa.temporadas
-    # print(f"{programa.nome} - {detalhes} : {programa.likes} Likes")
 
-print(f"Pertence a Playlist? {vingadores in playlist_fds.listagem}")
+print(f"Pertence a Playlist? {vingadores in playlist_fds}")
+
+
+# Inicialização	__init__                                                                 Inicialização	obj = Novo()
+# Representação	__str__, __repr__                                                        Representação	print(obj), str(obj), repr(obj)
+# Container, sequência	__contains__, __iter__, __len__, __getitem__                     Container, sequência	len(obj), item in obj, for i in obj, obj[2:3]
+# Numéricos	__add__, __sub__, __mul__, __mod__                                           Numéricos	obj + outro_obj, obj * obj
